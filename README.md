@@ -142,7 +142,7 @@ Each JSON object includes:
 
 ## 📜 License
 
-Copyright (c) 2025 Your Name or Organization. **All Rights Reserved.**
+Copyright (c) 2025 jonusNattapong/zombitx64. **All Rights Reserved.**
 
 This software is proprietary and confidential. Unauthorized copying, modification, distribution, or use is strictly prohibited. See the [LICENSE](LICENSE) file for details.
 
