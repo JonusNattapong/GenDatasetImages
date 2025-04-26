@@ -1,0 +1,77 @@
+# === Configuration for GenDatasetImages Script ===
+
+# --- A1111 API Settings ---
+# URL of your running Automatic1111 Web UI API endpoint
+# Ensure A1111 is running with the --api flag
+api_url: "http://127.0.0.1:7860"
+
+# --- Dataset Settings ---
+# Name of the dataset (will be used as the output folder name)
+dataset_name: "example_dataset"
+# Base directory where the 'dataset_name' folder will be created
+output_base_dir: "./output_datasets"
+
+# --- Generation Parameters ---
+# These are the base parameters sent to the A1111 /sdapi/v1/txt2img endpoint.
+# Values here will be used unless overridden by 'parameter_variations'.
+# Refer to your A1111 API documentation (/docs) for all available options.
+base_parameters:
+  prompt: "a high-quality photograph of a single red apple on a wooden table, dramatic lighting"
+  negative_prompt: "blurry, low quality, multiple apples, text, watermark, signature, drawing, painting, illustration"
+  sampler_name: "DPM++ 2M Karras" # Example sampler
+  steps: 25
+  cfg_scale: 7
+  width: 512
+  height: 512
+  seed: -1 # Use -1 for random seed, or specify a starting seed if desired
+  # --- Optional common parameters ---
+  # restore_faces: false
+  # tiling: false
+  # n_iter: 1 # Number of iterations (batches), usually keep at 1 for this script
+  # batch_size: 1 # Number of images per API call, usually keep at 1
+  # --- Advanced / Specific parameters (Add as needed) ---
+  # override_settings:
+  #   sd_model_checkpoint: "your_model_name.safetensors" # Example: Force a specific model
+  #   CLIP_stop_at_last_layers: 2 # Example: Clip skip
+  # styles: ["your_style_name"] # If you have saved styles in A1111
+
+# --- Parameter Variations ---
+# The script will generate an image for every possible combination of the values listed below.
+# The parameter names must match the keys expected by the A1111 txt2img API endpoint
+# (or keys within base_parameters that you want to vary).
+parameter_variations:
+  # Example 1: Vary the main subject and the seed
+  prompt:
+    - "a high-quality photograph of a single green pear on a wooden table, dramatic lighting"
+    - "a high-quality photograph of a bunch of grapes on a wooden table, dramatic lighting"
+  seed:
+    - 11111
+    - 22222
+    - 33333
+
+  # Example 2: Vary CFG scale and steps for the base prompt
+  # (Comment out the 'prompt' variation above if using this section)
+  # cfg_scale:
+  #   - 5.0
+  #   - 7.0
+  #   - 9.0
+  # steps:
+  #   - 20
+  #   - 30
+
+  # Example 3: Vary seed only
+  # (Comment out other variations if using this section)
+  # seed: [10, 20, 30, 40, 50]
+
+  # Example 4: Add stylistic elements to the prompt
+  # (Assumes 'prompt' is defined in base_parameters)
+  # prompt_suffix: # Custom key, needs handling in script if you want to append
+  #   - ", cinematic lighting"
+  #   - ", watercolor style"
+  #   - ", sketch, pencil drawing"
+  # Note: A 'prompt_suffix' key isn't standard A1111 API.
+  #       If you need this, the generator script would need modification
+  #       to combine base_prompt + suffix before sending the API request.
+  #       For simplicity, it's often easier to just list full prompts in the 'prompt' variation.
+
+# --- End of Configuration ---
